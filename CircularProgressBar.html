@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .outer {
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: conic-gradient(red 180deg, rgb(255, 255, 255) 0deg);
+    box-shadow: -5px -3px 14px 1px #000000, 0px 1px 14px 0px #ffffff;
+}
+
+.inner {
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0px 0px 4px 0px black;
+    font-weight: bolder;
+    font-size: 1rem;
+}
+
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner">0%</div>
+    </div>
+    
+</body>
+<script>
+    // 获取外部和内部div的引用
+const progressbar = document.querySelector(".outer");
+const innerbar = document.querySelector(".inner");
+
+// 初始角度为0
+let currentdeg = 0;
+
+// 定义一个每15毫秒执行一次的定时器
+const myInterval = setInterval(() => {
+    // 每次增加1度
+    currentdeg += 1;
+
+    // 计算当前角度对应的百分比
+    const percentage = Math.floor((currentdeg / 360) * 100);
+
+    // 更新外部div的背景渐变角度
+    progressbar.style.background = `conic-gradient(red ${currentdeg}deg, rgb(255, 255, 255) 0deg)`;
+
+    // 更新内部div显示的百分比
+    innerbar.innerHTML = `${percentage}%`;
+
+    // 如果达到60%以上，停止定时器
+    if (percentage > 60) {
+        clearInterval(myInterval);
+    }
+}, 15);
+
+</script>
+</html>
